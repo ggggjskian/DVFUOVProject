@@ -13,5 +13,6 @@ public class GameWorld extends MyWorld{
         PhoneImage = new GreenfootImage("backgroundGame.jpg");
         PhoneImage.scale(getWidth(), getHeight());
         setBackground(PhoneImage);
+        addObject(new Hero(), 100 ,310);
     }
 }

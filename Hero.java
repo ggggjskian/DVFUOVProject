@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Hero extends Actor{
     
     
-    
+    /* Для анимашки **/
     GreenfootImage StaticHero;
     GreenfootImage StaticHeroHorizont;
     GreenfootImage[] walkRight = new GreenfootImage[3];
@@ -19,9 +19,13 @@ public class Hero extends Actor{
     int animationDelay = 5;
     int animationCounter = 0;
     
+    /* Для игровой механики платоформера **/
+    int speedH = 5;
+    int gravity = 1;
+    int speedV = 0;
+    final int Jump = -15;
 
-    int speed = 5;
-        
+    
     public Hero (){
         
         for(int i = 0; i < 3; i++) {
@@ -43,23 +47,27 @@ public class Hero extends Actor{
     public void act(){
         moveV();
         animate();
+        fall();
+        checkLand();
     }
     
     public void moveV(){
         
+        if (Greenfoot.isKeyDown("space") && check()) {
+            speedV = Jump;}
+            
         if ((Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) && getX() > getImage().getWidth()/ 2 - 15){
-            setLocation(getX() - speed, getY());
+            setLocation(getX() - speedH, getY());
             HereWeGo = 0;
             facingRight = false;
         }else if ((Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) && (getX() < getWorld().getWidth() - getImage().getWidth()/2)){
-            setLocation(getX() + speed, getY());
+            setLocation(getX() + speedH, getY());
             HereWeGo = 2;
             facingRight = true;
         }else{
             HereWeGo = 1;
         }
     } 
-    
     
     public void animate(){
         ++animationCounter;
@@ -69,12 +77,26 @@ public class Hero extends Actor{
         }else if(HereWeGo == 0){
             setImage(walkLeft[frame]);
         }else{
-            if (facingRight) setImage(StaticHero);
+            if(facingRight)setImage(StaticHero);
             else setImage(StaticHeroHorizont);
             
         }
     
     }
+    public boolean check(){
+        if (speedV == 0)return true;
+        return false;
+    }
+    public void checkLand() {
+        if (getY() >= 310  && speedV > 0) {
+            setLocation(getX(), 310);
+            speedV = 0;
+        }
+    }
     
-
+    public void fall(){
+            speedV += gravity;
+            setLocation(getX(), getY() + speedV);
+    }
 }
+

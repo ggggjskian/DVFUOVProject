@@ -7,12 +7,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class PlayButton extends Button{
+    
     GameWorld world;
     
-    
     public PlayButton() {
-        super(200, 80);
- 
+        super(200, 80, "play.png");
     }
     
     public void act(){

@@ -11,12 +11,16 @@ public class Button extends Actor{
     
     protected int width;
     protected int height;
+    GreenfootImage buttonImage;
     
-    public Button(int width, int height) {
+    public Button(int width, int height, String path) {
         this.width = width;
         this.height = height;
-        setImage(new GreenfootImage(width, height));
+        buttonImage = new GreenfootImage(path);
+        buttonImage.scale(width, height);
+        setImage(buttonImage);
     }
+    
     public void execute(Runnable func){
         if(Greenfoot.mouseClicked(this)){
             func.run();        
