@@ -11,7 +11,7 @@ public class InfoAboutGameButton extends Button{
     private String pathTxtFile = "AboutGame.txt";
     
     InfoAboutGameButton(){
-        super(100, 100,"decor.png");
+        super(135, 164,"reference.png");
     }
     
     public void act(){

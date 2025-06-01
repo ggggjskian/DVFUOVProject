@@ -13,7 +13,8 @@ public class Menu extends MyWorld
         PhoneImage = new GreenfootImage("MenuBackground.jpg");
         PhoneImage.scale(getWidth(), getHeight());
         setBackground(PhoneImage);
-        //addObject(new PlayButton(), 100,100);
-        //addObject(new InfoAboutGameButton(), 300,300);
+        addObject(new PlayButton(), 258,241);
+        addObject(new ControlsButton(), 261, 332);
+        addObject(new InfoAboutGameButton(), 80,118);
     }
 }

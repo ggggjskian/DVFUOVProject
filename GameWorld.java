@@ -1,18 +1,15 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*; 
 
-/**
- * Write a description of class GameWorld here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class GameWorld extends MyWorld{
-    
+public class GameWorld extends MyWorld
+{
     GreenfootImage PhoneImage;
-    public GameWorld(){
+    public GameWorld()
+    {
         PhoneImage = new GreenfootImage("backgroundGame.jpg");
         PhoneImage.scale(getWidth(), getHeight());
         setBackground(PhoneImage);
         addObject(new Hero(), 100 ,310);
+        
+        addObject(new BackButton(), 17, 15);
     }
 }
