@@ -11,5 +11,6 @@ public class GameWorld extends MyWorld
         addObject(new Hero(), 100 ,310);
         
         addObject(new BackButton(), 17, 15);
+        addObject(new Platform(), 120,270);
     }
 }

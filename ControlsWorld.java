@@ -16,5 +16,7 @@ public class ControlsWorld extends MyWorld
         addObject(new KeyIcon("s", "S.png", "S_L.png", 66, 66), 201, 215);
         addObject(new KeyIcon("d", "D.png", "D_L.png", 66, 66), 270, 215);
         addObject(new KeyIcon("space", "SPACE.png", "SPACE_L.png", 177, 97), 439, 179);
+        
+        setPaintOrder(Hero.class, KeyIcon.class);
     }
 }
