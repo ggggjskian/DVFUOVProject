@@ -1,9 +1,12 @@
 #Greenfoot project file
+class.ControlsWorld.image=ControlsBackground.png
+class.FinalDisplay.image=finalLoc.png
 class.GameWorld.image=backgroundGame.jpg
 class.Menu.image=MenuBackground.jpg
 dependency1.from=ControlsWorld
 dependency1.to=Hero
 dependency1.type=UsesDependency
+<<<<<<< HEAD
 dependency10.from=Menu
 dependency10.to=PlayButton
 dependency10.type=UsesDependency
@@ -31,6 +34,38 @@ dependency17.type=UsesDependency
 dependency18.from=Hero
 dependency18.to=Platform
 dependency18.type=UsesDependency
+=======
+dependency10.from=FinalDisplay
+dependency10.to=Platform
+dependency10.type=UsesDependency
+dependency11.from=Menu
+dependency11.to=PlayButton
+dependency11.type=UsesDependency
+dependency12.from=Menu
+dependency12.to=ControlsButton
+dependency12.type=UsesDependency
+dependency13.from=Menu
+dependency13.to=InfoAboutGameButton
+dependency13.type=UsesDependency
+dependency14.from=Boss
+dependency14.to=Hero
+dependency14.type=UsesDependency
+dependency15.from=Boss
+dependency15.to=GameWorld
+dependency15.type=UsesDependency
+dependency16.from=BackButton
+dependency16.to=Menu
+dependency16.type=UsesDependency
+dependency17.from=ControlsButton
+dependency17.to=ControlsWorld
+dependency17.type=UsesDependency
+dependency18.from=PlayButton
+dependency18.to=GameWorld
+dependency18.type=UsesDependency
+dependency19.from=Hero
+dependency19.to=Platform
+dependency19.type=UsesDependency
+>>>>>>> 0287032969f0dc95f0125209b98e9bb60ae5d8e1
 dependency2.from=ControlsWorld
 dependency2.to=BackButton
 dependency2.type=UsesDependency
@@ -55,12 +90,21 @@ dependency8.type=UsesDependency
 dependency9.from=FinalDisplay
 dependency9.to=Boss
 dependency9.type=UsesDependency
+<<<<<<< HEAD
 editor.fx.0.height=926
 editor.fx.0.width=1454
 editor.fx.0.x=-7
 editor.fx.0.y=-7
 height=926
 package.numDependencies=18
+=======
+editor.fx.0.height=0
+editor.fx.0.width=0
+editor.fx.0.x=0
+editor.fx.0.y=0
+height=689
+package.numDependencies=19
+>>>>>>> 0287032969f0dc95f0125209b98e9bb60ae5d8e1
 package.numTargets=14
 project.charset=UTF-8
 publish.hasSource=false
@@ -161,21 +205,36 @@ target7.width=120
 target7.x=0
 target7.y=0
 target8.height=70
+<<<<<<< HEAD
 target8.name=Button
+=======
+target8.name=FinalDisplay
+>>>>>>> 0287032969f0dc95f0125209b98e9bb60ae5d8e1
 target8.showInterface=false
 target8.type=ClassTarget
 target8.width=120
 target8.x=0
 target8.y=0
 target9.height=70
+<<<<<<< HEAD
 target9.name=FinalDisplay
+=======
+target9.name=Button
+>>>>>>> 0287032969f0dc95f0125209b98e9bb60ae5d8e1
 target9.showInterface=false
 target9.type=ClassTarget
 target9.width=120
 target9.x=0
 target9.y=0
 version=3.1.0
+<<<<<<< HEAD
 width=1454
 world.lastInstantiated=GameWorld
 xPosition=0
 yPosition=0
+=======
+width=1280
+world.lastInstantiated=FinalDisplay
+xPosition=0
+yPosition=25
+>>>>>>> 0287032969f0dc95f0125209b98e9bb60ae5d8e1
