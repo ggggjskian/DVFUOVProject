@@ -9,3 +9,7 @@ public class Platform extends Actor
         setImage(img);
     }
 }
+
+
+
+
