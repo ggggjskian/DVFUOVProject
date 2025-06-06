@@ -3,14 +3,19 @@ import greenfoot.*;
 public class GameWorld extends MyWorld
 {
     GreenfootImage PhoneImage;
-    public GameWorld()
-    {
+    private Hero hero;
+    private int cameraOffsetY = 100;
+    
+    public GameWorld() {
         PhoneImage = new GreenfootImage("backgroundGame.jpg");
         PhoneImage.scale(getWidth(), getHeight());
         setBackground(PhoneImage);
-        addObject(new Hero(), 100 ,310);
-        
+        hero = new Hero(false);
+        addObject(hero, getWidth()/2 ,310);
         addObject(new BackButton(), 17, 15);
-        addObject(new Platform(), 120,270);
+        addObject(new Platform(), 270, 255);
+       
     }
+    
+    
 }

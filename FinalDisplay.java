@@ -8,12 +8,11 @@ public class FinalDisplay extends MyWorld
         PhoneImage = new GreenfootImage("finalLoc.png");
         PhoneImage.scale(getWidth(), getHeight());
         setBackground(PhoneImage);
-        addObject(new Hero(), 100 ,310);
+        addObject(new Hero(true), 100 ,310);
         
         addObject(new BackButton(), 17, 15);
         
         addObject(new Boss(), 440, 270);
         
-        addObject(new Platform(), 270,260);
     }
 }

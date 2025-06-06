@@ -17,13 +17,13 @@ public class Hero extends Actor
     int gravity = 1;
     int speedV = 0; 
     final int Jump = -15;
+    
+    boolean FinalLoca;
 
     
-    public Hero() 
-    {
+    public Hero(boolean flag) {
         //анимации ходьбы
-        for (int i = 0; i < 3; i++) 
-        {
+        for (int i = 0; i < 3; i++) {
             walkRight[i] = new GreenfootImage("spriteWalk" + i + ".png");
             walkLeft[i] = new GreenfootImage("spriteWalk" + i + ".png");
             walkLeft[i].mirrorHorizontally(); 
@@ -36,25 +36,25 @@ public class Hero extends Actor
         StaticHero.scale(75, 75);
         StaticHeroHorizont = new GreenfootImage(StaticHero);
         StaticHeroHorizont.mirrorHorizontally();
-        setImage(StaticHero); 
+        setImage(StaticHero);
+        this.FinalLoca = flag;
     }
 
-    public void act()
-    {
-        moveV();  //обработка управления
-        animate(); //анимация
-        fall();  //применение гравитации
-        checkLand(); //проверка на приземление
-    }
-
-    
-    public void moveV() 
-    {
-        if (Greenfoot.isKeyDown("space") && check()) 
-        {
-            speedV = Jump;
+    public void act() {
+        if (!FinalLoca){
+            fall();  //применение гравитации
+            checkLandLeft();//проверка на приземление
+            checkLandRight();
+            checkLandUnderLeft();
+            checkLandUnderRight();
+            
         }
-
+        move();
+        animate();
+    }
+    
+    public void move() {
+         
         if ((Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) && getX() > getImage().getWidth() / 2 - 15) 
         {
             setLocation(getX() - speedH, getY());
@@ -67,14 +67,25 @@ public class Hero extends Actor
             HereWeGo = 2;
             facingRight = true;
         }
-        else 
-        {
+        else {
             HereWeGo = 1;
+        }
+        
+        if (FinalLoca) {
+            if (Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up")) {
+                setLocation(getX(), getY() - speedH);}
+            else if ((Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("down")) && getY() < getWorld().getHeight() - getImage().getHeight() / 2) {
+                setLocation(getX(), getY() + speedH);
+            }
+        }
+        else {
+             if (Greenfoot.isKeyDown("space") && check()) {
+                speedV = Jump;
+            } 
         }
     }
 
-    public void animate() 
-    {
+    public void animate() {
         ++animationCounter;
         int frame = (animationCounter / animationDelay) % 3;
 
@@ -93,33 +104,63 @@ public class Hero extends Actor
         }
     }
 
-    public boolean check() 
-    {
-        return isTouching(Platform.class) || getY() >= 310;
+    public boolean check() {
+        return (isTouching(Platform.class) || getY() >= 310) && speedV == 0;
     }
 
-    public void checkLand() 
-    {
-        Actor platform = getOneObjectAtOffset(0, getImage().getHeight() / 2 + 5, Platform.class);
-
-        //приземление на платформу
-        if (platform != null && speedV >= 0) 
-        {
+    public void checkLandLeft() {
+        Actor platform = getOneObjectAtOffset(10, getImage().getHeight() / 2 + 5, Platform.class);
+        if (platform != null && speedV >= 0) {
             int platformTop = platform.getY() - platform.getImage().getHeight() / 2;
             int heroHalfHeight = getImage().getHeight() / 2;
-            setLocation(getX(), platformTop - heroHalfHeight);
-            speedV = 0;
+            setLocation(getX(), platformTop - heroHalfHeight); 
+            speedV = 0; 
         } 
-        //приземление на землю
-        else if (getY() >= 310 && speedV >= 0) 
-        {
+        else if (getY() >= 310 && speedV >= 0) {
             setLocation(getX(), 310);
             speedV = 0;
         }
     }
+    
+    
+    
+    public void checkLandRight() {
+        Actor platform = getOneObjectAtOffset(-10, getImage().getHeight() / 2 + 5, Platform.class);
+        if (platform != null && speedV >= 0) {
+            int platformTop = platform.getY() - platform.getImage().getHeight() / 2;
+            int heroHalfHeight = getImage().getHeight() / 2;
+            setLocation(getX(), platformTop - heroHalfHeight); 
+            speedV = 0; 
+        } 
+        else if (getY() >= 310 && speedV >= 0) {
+            setLocation(getX(), 310);
+            speedV = 0;
+        }
+    }
+    
+    public void checkLandUnderLeft() {
+        Actor platform = getOneObjectAtOffset(30, -getImage().getHeight() / 2 - 5, Platform.class);
+        if (platform != null && speedV < 0) {
+            int platformTop = platform.getY() + platform.getImage().getHeight() / 2;
+            int heroHalfHeight = getImage().getHeight() / 2;
+            setLocation(getX(), platformTop + heroHalfHeight); 
+            speedV = 0; 
+        } 
+       
+    }
+    
+    public void checkLandUnderRight() {
+        Actor platform = getOneObjectAtOffset(-30, -getImage().getHeight() / 2 - 5, Platform.class);
+        if (platform != null && speedV < 0) {
+            int platformTop = platform.getY() + platform.getImage().getHeight() / 2;
+            int heroHalfHeight = getImage().getHeight() / 2;
+            setLocation(getX(), platformTop + heroHalfHeight); 
+            speedV = 0; 
+        } 
+       
+    }
 
-    public void fall() 
-    {
+    public void fall() {
         speedV += gravity; 
         setLocation(getX(), getY() + speedV); 
     }

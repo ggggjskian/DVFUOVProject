@@ -7,7 +7,7 @@ public class ControlsWorld extends MyWorld
         GreenfootImage bg = new GreenfootImage("ControlsBackground.png");
         bg.scale(getWidth(), getHeight());
         setBackground(bg);
-        addObject(new Hero(), 100, 310);
+        addObject(new Hero(false), 100, 310);
         
         addObject(new BackButton(), 17, 15);
         
