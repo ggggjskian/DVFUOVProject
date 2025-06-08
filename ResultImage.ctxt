@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=ResultImage
+comment1.params=imagePath\ width\ height
+comment1.target=ResultImage(java.lang.String,\ int,\ int)
+comment2.params=imagePath
+comment2.target=ResultImage(java.lang.String)
+numComments=3

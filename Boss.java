@@ -63,38 +63,46 @@ public class Boss extends Actor
         }
     }
 
-    public void checkHeroCollision() 
+    
+        public void checkHeroCollision() 
     {
         Hero hero = (Hero)getOneIntersectingObject(Hero.class);
         if (hero != null) 
         {
-            int heroBottom = hero.getY() + hero.getImage().getHeight() / 2;
-            int bossTop = getY() - getImage().getHeight() / 2;
-            if (heroBottom < bossTop + 10) 
-            {
-                // Герой сверху —> лопаем босса
-                state = 1;
-                animationCounter = 0;
-                frameIndex = 0;
-            } else 
-            {
-                // Герой сбоку/снизу — перезапуск мира
-                Greenfoot.setWorld(new GameWorld());
-            }
+        int heroBottom = hero.getY() + hero.getImage().getHeight() / 2;
+        int bossTop = getY() - getImage().getHeight() / 2;
+        if (heroBottom < bossTop + 10) 
+        {
+            // Герой сверху —> лопаем босса
+            state = 1;
+            animationCounter = 0;
+            frameIndex = 0;
+        } 
+        else 
+        {
+            // Герой сбоку/снизу — проигрыш
+            getWorld().addObject(new ResultImage("lose.png"), getWorld().getWidth()/2, getWorld().getHeight()/2);
+            Greenfoot.delay(100); 
+            Greenfoot.setWorld(new GameWorld());
+        }
         }
     }
 
+    
     public void animatePop() 
     {
         if (animationCounter % animationDelay == 0 && frameIndex < 3) 
         {
-            setImage(popAnim[frameIndex]);
-            frameIndex++;
+        setImage(popAnim[frameIndex]);
+        frameIndex++;
         }
         animationCounter++;
         if (frameIndex >= 3) 
         {
-            getWorld().removeObject(this);
+        getWorld().addObject(new ResultImage("win.png"), getWorld().getWidth() / 2, getWorld().getHeight() / 2);
+        Greenfoot.delay(130); 
+        Greenfoot.setWorld(new Menu()); 
         }
     }
+
 }
