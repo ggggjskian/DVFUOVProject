@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Portal
+comment1.params=
+comment1.target=Portal()
+comment2.params=width\ height
+comment2.target=void\ setSize(int,\ int)
+numComments=3

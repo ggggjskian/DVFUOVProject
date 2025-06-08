@@ -1,4 +1,4 @@
-import greenfoot.*; 
+import greenfoot.*;
 
 public class GameWorld extends MyWorld
 {
@@ -6,16 +6,20 @@ public class GameWorld extends MyWorld
     private Hero hero;
     private int cameraOffsetY = 100;
     
-    public GameWorld() {
-        PhoneImage = new GreenfootImage("backgroundGame.jpg");
-        PhoneImage.scale(getWidth(), getHeight());
+    public GameWorld() 
+    {
+        super(600, 3600, 1);
+        PhoneImage = new GreenfootImage("allGame.png");
         setBackground(PhoneImage);
-        hero = new Hero(false);
-        addObject(hero, getWidth()/2 ,310);
+        
+        hero = new Hero(false, 3510); 
+        addObject(hero, getWidth() / 2 , 3510);
+
         addObject(new BackButton(), 17, 15);
-        addObject(new Platform(), 270, 255);
-       
+        
+        Portal portal = new Portal();
+        portal.setSize(100, 100);
+        addObject(portal, 300, 231);
+        
     }
-    
-    
 }
