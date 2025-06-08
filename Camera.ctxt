@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Camera
+comment1.params=world\ host
+comment1.target=Camera(greenfoot.World,\ greenfoot.Actor)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ setGhosts()
+comment4.params=
+comment4.target=void\ setBackground()
+comment5.params=
+comment5.target=void\ actWorld()
+numComments=6
