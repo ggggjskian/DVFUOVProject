@@ -22,7 +22,7 @@ public class Projectile extends Actor
         {
             restartWithCamera(); // Вместо простого перезапуска
         } 
-        else if (getY() > getWorld().getHeight() + 50) 
+        else if (getY() > getWorld().getHeight() - getImage().getHeight()) 
         {
             getWorld().removeObject(this); // Удаляем снаряд за пределами мира
         }

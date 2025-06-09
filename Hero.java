@@ -16,7 +16,7 @@ public class Hero extends Actor
     int speedH = 5; 
     int gravity = 1;
     int speedV = 0; 
-    final int Jump = -15;
+    final int Jump = -20;
 
     boolean FinalLoca;
     private int groundLevel = 310;

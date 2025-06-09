@@ -34,9 +34,9 @@ public class GameWorld extends MyWorld
     }
 
     private void spawnProjectile() 
-    {
-        int x = Greenfoot.getRandomNumber(getWidth());
+    {   
         Projectile p = new Projectile();
+        int x = Greenfoot.getRandomNumber(getWidth() - p.getImage().getWidth()/2) + p.getImage().getWidth()/2 ;
         addObject(p, x, 0);
     }
 

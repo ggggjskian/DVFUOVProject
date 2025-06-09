@@ -32,11 +32,11 @@ public class Camera extends World {
     private void setGhosts()
     {
         removeObjects(getObjects(Ghost.class));
-        addObject(new Ghost(h[0], s), h[0].getX(), y/2);
+        addObject(new Ghost(h[0], s), h[0].getX(), (int)(y*0.8));
         for(Object o : w.getObjects(null))
         {
             if(o!=h[0]){
-                addObject(new Ghost((Actor)o, s), ((Actor)o).getX(), ((Actor)o).getY()-h[0].getY()+y/2);
+                addObject(new Ghost((Actor)o, s), ((Actor)o).getX(), ((Actor)o).getY()-h[0].getY()+(int)(y*0.8));
             }
         }
     }
@@ -46,9 +46,10 @@ public class Camera extends World {
     private void setBackground(){
         setBackground(w.getBackground());
         GreenfootImage temp = new GreenfootImage(getBackground().getWidth(), getBackground().getWidth());
-        temp.setColor(greenfoot.Color.DARK_GRAY);
+        Color myColor = new Color(9, 111, 196);
+        temp.setColor(myColor);
         temp.fill();
-        temp.drawImage(w.getBackground(), 0, y/2-h[0].getY());
+        temp.drawImage(w.getBackground(), 0, (int)(y*0.8)-h[0].getY());
         setBackground(temp);
     }
 
