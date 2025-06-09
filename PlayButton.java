@@ -14,12 +14,10 @@ public class PlayButton extends Button
         execute(this::beginGame);
     }
     
-    public void beginGame()
+    public void beginGame() 
     {
-        GameWorld world = new GameWorld();
-        Greenfoot.setWorld(world);
-    
+        GameWorld gw = new GameWorld();
+        Camera camera = new Camera(gw, gw.getHero());
+        Greenfoot.setWorld(camera);
     }
-    
-    
 }

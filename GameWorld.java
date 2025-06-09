@@ -20,7 +20,13 @@ public class GameWorld extends MyWorld
         Portal portal = new Portal();
         portal.setSize(100, 100);
         addObject(portal, 300, 240);
-        Greenfoot.setWorld(new Camera(this, hero));
+        
         
     }
+    
+    public Hero getHero() 
+    {
+        return hero;
+    }
+
 }

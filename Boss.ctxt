@@ -10,4 +10,6 @@ comment4.params=
 comment4.target=void\ checkHeroCollision()
 comment5.params=
 comment5.target=void\ animatePop()
-numComments=6
+comment6.params=
+comment6.target=void\ restartWithCamera()
+numComments=7

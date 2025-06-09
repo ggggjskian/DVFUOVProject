@@ -2,4 +2,6 @@
 comment0.target=GameWorld
 comment1.params=
 comment1.target=GameWorld()
-numComments=2
+comment2.params=
+comment2.target=Hero\ getHero()
+numComments=3

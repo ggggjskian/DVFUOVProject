@@ -83,7 +83,7 @@ public class Boss extends Actor
             // Герой сбоку/снизу — проигрыш
             getWorld().addObject(new ResultImage("lose.png"), getWorld().getWidth()/2, getWorld().getHeight()/2);
             Greenfoot.delay(100); 
-            Greenfoot.setWorld(new GameWorld());
+            restartWithCamera();
         }
         }
     }
@@ -104,5 +104,12 @@ public class Boss extends Actor
         Greenfoot.setWorld(new Menu()); 
         }
     }
-
+    
+    private void restartWithCamera() 
+    {
+        GameWorld newWorld = new GameWorld();
+        Hero newHero = newWorld.getHero();
+        Camera camera = new Camera(newWorld, newHero);
+        Greenfoot.setWorld(camera);
+    }
 }

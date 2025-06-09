@@ -29,10 +29,12 @@ public class Camera extends World {
         setBackground();
     }
 
-    private void setGhosts(){
+    private void setGhosts()
+    {
         removeObjects(getObjects(Ghost.class));
         addObject(new Ghost(h[0], s), h[0].getX(), y/2);
-        for(Object o : w.getObjects(null)){
+        for(Object o : w.getObjects(null))
+        {
             if(o!=h[0]){
                 addObject(new Ghost((Actor)o, s), ((Actor)o).getX(), ((Actor)o).getY()-h[0].getY()+y/2);
             }
