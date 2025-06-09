@@ -2,15 +2,15 @@ import greenfoot.*;
 
 public class Projectile extends Actor 
 {
-    private int speed = 4;
+    private int speed = 8;
 
     public Projectile() 
     {
     setImage("bullet.png"); 
     GreenfootImage img = getImage();
     img.scale(40, 40);
-    img.rotate(270); // Поворот на 90 градусов
-    setImage(img);  // Устанавливаем повернутое изображение
+    img.rotate(270); 
+    setImage(img);  
     }
 
 
@@ -20,7 +20,7 @@ public class Projectile extends Actor
         
         if (isTouching(Hero.class)) 
         {
-            restartWithCamera(); // Вместо простого перезапуска
+            restartWithCamera(); 
         } 
         else if (getY() > getWorld().getHeight() - getImage().getHeight()) 
         {
