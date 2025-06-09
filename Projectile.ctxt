@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Projectile
+comment1.params=
+comment1.target=Projectile()
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ restartWithCamera()
+numComments=4

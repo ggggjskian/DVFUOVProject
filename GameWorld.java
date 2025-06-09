@@ -1,10 +1,11 @@
 import greenfoot.*;
 
-public class GameWorld extends MyWorld
+public class GameWorld extends MyWorld 
 {
     GreenfootImage PhoneImage;
     private Hero hero;
-    private int cameraOffsetY = 100;
+    private int projectileTimer = 0;
+    private int spawnInterval = 100;
     
     public GameWorld() 
     {
@@ -17,16 +18,32 @@ public class GameWorld extends MyWorld
         
         generatePlatforms();
         
-    
         Portal portal = new Portal();
         portal.setSize(100, 100);
         addObject(portal, 300, 240);
     }
-    
-   private void generatePlatforms() 
+
+    public void act() 
+    {
+        projectileTimer++;
+        if (projectileTimer >= spawnInterval) 
+        {
+            spawnProjectile();
+            projectileTimer = 0;
+        }
+    }
+
+    private void spawnProjectile() 
+    {
+        int x = Greenfoot.getRandomNumber(getWidth());
+        Projectile p = new Projectile();
+        addObject(p, x, 0);
+    }
+
+    private void generatePlatforms()
     {
         int startY = 3450;          // Стартовая высота
-        int stepY = 125;            // Вертикальное расстояние между платформами
+        int stepY = 123;            // Вертикальное расстояние между платформами
         int platformCount = 26;     // Кол-во платформ
         int fixedStepX = 120;        // горизонтальное смещение
         int minXBoundary = 60;
@@ -57,7 +74,6 @@ public class GameWorld extends MyWorld
             previousX = nextX;
         }
     }
-
 
     public Hero getHero() 
     {
