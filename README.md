@@ -10,7 +10,7 @@
     ```
 2. Клонировать репозиторий;
     ```bash
-    git clone https://github.com/anikin02/LanguageLearningApp.git
+    git clonehttps://github.com/ggggjskian/DVFUOVProjectt.git
     ```
 
 3. Открыть файла project.gar;
