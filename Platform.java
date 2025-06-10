@@ -1,4 +1,4 @@
-import greenfoot.*;
+    import greenfoot.*;
 
 public class Platform extends Actor 
 {

@@ -1,10 +1,10 @@
 import greenfoot.*; 
 
-public class FinalDisplay extends MyWorld
-{
+public class FinalDisplay extends MyWorld {
+    
     GreenfootImage PhoneImage;
-    public FinalDisplay()
-    {
+    
+    public FinalDisplay() {
         PhoneImage = new GreenfootImage("finalLoc.png");
         PhoneImage.scale(getWidth(), getHeight());
         setBackground(PhoneImage);
