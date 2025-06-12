@@ -17,15 +17,15 @@ public class Boss extends Actor {
     int DelayMove = 20;
     int frameIndex = 0;
     int BossHealth = 3;
-    int shootDelay = 180;
+    int shootDelay = 60;
     int shotTimer = 0;
     int state = 0; // 0 - обычная анимация 1 - лопание
 
     public Boss() {
         // Масштабирование
-        raise0.scale(150, 150);
-        raise1.scale(150, 150);
-        raise2.scale(150, 150);
+        raise0.scale(190, 190);
+        raise1.scale(190, 190);
+        raise2.scale(190, 190);
         raiseHand[0] = raise0;
         raiseHand[1] = raise1;
         raiseHand[2] = raise2;
@@ -46,7 +46,7 @@ public class Boss extends Actor {
         animateRaise();
         checkHeroCollision();
         checkDefeatBoss();  
-        moveBoss(10);
+        //moveBoss(10);
         shoot();
     
     }
@@ -159,22 +159,29 @@ public class Boss extends Actor {
         this.BossHealth -= 1;
     }
     
-    public void shoot() {
+    public void shoot() 
+    {
         shotTimer--;
+        if (shotTimer <= 0) 
+        {
 
-        if (shotTimer <= 0) {
-            Hero hero = getWorld().getObjects(Hero.class).get(0);
+            int[] bulletHeights = {290, 170};
+            int selectedIndex = Greenfoot.getRandomNumber(2);
+            int selectedY = bulletHeights[selectedIndex];
 
-            if (hero!= null) {
-                int angleToHero = (int) Math.toDegrees(Math.atan2(hero.getY() - getY(), hero.getX() - getX()) );
-                BosBullet bullet = new BosBullet(angleToHero);
+            int angleToShoot = 180; 
 
-                getWorld().addObject(bullet, getX(), getY());
+            int spacing = 80;
 
-                shotTimer = shootDelay;
+            for (int i = -1; i <= 1; i++) 
+            {
+            int offsetX = i * spacing;
+            BosBullet bullet = new BosBullet(angleToShoot);
+            getWorld().addObject(bullet, getX() + offsetX, selectedY);
             }
+
+            shotTimer = shootDelay;
         }
     }
-
-
 }
+

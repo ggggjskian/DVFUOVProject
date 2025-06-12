@@ -12,19 +12,20 @@ public class BosBullet extends Actor {
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    int speed = 4;
+    int speed = 6;
     int rotation;
     
     
     public BosBullet(int angle){
         this.rotation = angle;
         GreenfootImage BulletImage = new GreenfootImage("bullet.png");
-        BulletImage.scale(40,40);
+        BulletImage.scale(50,50);
         setImage(BulletImage);
 
     }
     
-    public void act(){
+    public void act()
+    {
         checkCollision();
         move();
           if (isAtEdge()) {
@@ -32,21 +33,33 @@ public class BosBullet extends Actor {
         }
     }
     
-    public void move() {
+    public void move() 
+    {
         double angleInRadians = Math.toRadians(rotation);
-        int dx = (int) (speed * Math.cos(angleInRadians));
-        int dy = (int) (speed * Math.sin(angleInRadians));
-        setLocation((int)(getX() + dx), (int)(getY() + dy));
+        int dx = (int) Math.round(speed * Math.cos(angleInRadians));
+        int dy = (int) Math.round(speed * Math.sin(angleInRadians));
+        setLocation(getX() + dx, getY() + dy);
     }
+
     
     
-    public void checkCollision(){
-        if (isTouching(Hero.class)) {
-            restartWithCamera(); 
-        } 
+    public void checkCollision() 
+    {
+        if (isTouching(Hero.class)) 
+        {
+        World world = getWorld();
+        if (world != null) 
+        {
+            ResultImage loseImage = new ResultImage("lose.png");
+            world.addObject(loseImage, world.getWidth() / 2, world.getHeight() / 2);
+            Greenfoot.delay(70);  
+            restartWithCamera();
+        }
     }
+}
     
-    private void restartWithCamera() {
+    private void restartWithCamera() 
+    {
         GameWorld newWorld = new GameWorld();
         Hero newHero = newWorld.getHero();
         Camera camera = new Camera(newWorld, newHero);
