@@ -15,7 +15,7 @@ public class FinalDisplay extends MyWorld
         
         addObject(new Platform(), 240, 240);
         
-        TimerDisplay timer = new TimerDisplay(5);
+        TimerDisplay timer = new TimerDisplay(20);
         addObject(timer, 560, 20);
         
         Boss boss = new Boss(timer); 

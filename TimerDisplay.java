@@ -33,7 +33,7 @@ public class TimerDisplay extends Actor
 
             if (timeLeft < 0) 
             {
-                timeLeft = 5;  
+                timeLeft = 20;  
                 phaseCount++;  
             }
             updateImage();
