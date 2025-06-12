@@ -12,11 +12,13 @@ public class FinalDisplay extends MyWorld
         
         addObject(new BackButton(), 17, 15);
         
-        addObject(new Boss(), 440, 240);
         
         addObject(new Platform(), 240, 240);
         
-         TimerDisplay timer = new TimerDisplay(30);
+        TimerDisplay timer = new TimerDisplay(5);
         addObject(timer, 560, 20);
+        
+        Boss boss = new Boss(timer); 
+        addObject(boss, 440, 240);
     }
 }

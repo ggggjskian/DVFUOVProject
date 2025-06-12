@@ -1,38 +1,27 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
-/**
- * Write a description of class BosBullet here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class BosBullet extends Actor {
-    /**
-     * Act - do whatever the BosBullet wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    
-    int speed = 6;
+public class BosBullet extends Actor 
+{
+    int speed = 8;
     int rotation;
-    
-    
-    public BosBullet(int angle){
+    public BosBullet(int angle)
+    {
         this.rotation = angle;
         GreenfootImage BulletImage = new GreenfootImage("bullet.png");
         BulletImage.scale(50,50);
         setImage(BulletImage);
-
     }
-    
-    public void act()
+
+    public void act() 
     {
         checkCollision();
         move();
-          if (isAtEdge()) {
+        if (isAtEdge()) 
+        {
             getWorld().removeObject(this); 
         }
     }
-    
+
     public void move() 
     {
         double angleInRadians = Math.toRadians(rotation);
@@ -41,23 +30,21 @@ public class BosBullet extends Actor {
         setLocation(getX() + dx, getY() + dy);
     }
 
-    
-    
     public void checkCollision() 
     {
         if (isTouching(Hero.class)) 
         {
-        World world = getWorld();
-        if (world != null) 
-        {
-            ResultImage loseImage = new ResultImage("lose.png");
-            world.addObject(loseImage, world.getWidth() / 2, world.getHeight() / 2);
-            Greenfoot.delay(70);  
-            restartWithCamera();
+            World world = getWorld();
+            if (world != null) 
+            {
+                ResultImage loseImage = new ResultImage("lose.png");
+                world.addObject(loseImage, world.getWidth() / 2, world.getHeight() / 2);
+                Greenfoot.delay(70);  
+                restartWithCamera();
+            }
         }
     }
-}
-    
+
     private void restartWithCamera() 
     {
         GameWorld newWorld = new GameWorld();

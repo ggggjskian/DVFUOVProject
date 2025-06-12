@@ -1,6 +1,8 @@
 import greenfoot.*;
 import java.util.Random;
-public class Boss extends Actor {
+
+public class Boss extends Actor 
+{
     GreenfootImage raise0 = new GreenfootImage("staticBoss.png");
     GreenfootImage raise1 = new GreenfootImage("handBoss.png");
     GreenfootImage raise2 = new GreenfootImage("muscleBoss.png");
@@ -11,18 +13,25 @@ public class Boss extends Actor {
 
     GreenfootImage[] raiseHand = new GreenfootImage[3];
     GreenfootImage[] popAnim = new GreenfootImage[3];
+
     Random random = new Random();
+
     int animationCounter = 0;
     int animationDelay = 10;
-    int DelayMove = 20;
     int frameIndex = 0;
-    int BossHealth = 3;
+    int DelayMove = 20;
+    
     int shootDelay = 60;
-    int shotTimer = 0;
-    int state = 0; // 0 - обычная анимация 1 - лопание
+    int shotTimer = shootDelay;
 
-    public Boss() {
-        // Масштабирование
+    int state = 0;
+
+    TimerDisplay timerRef;
+
+    public Boss(TimerDisplay timer) 
+    {
+        this.timerRef = timer;
+
         raise0.scale(190, 190);
         raise1.scale(190, 190);
         raise2.scale(190, 190);
@@ -30,158 +39,168 @@ public class Boss extends Actor {
         raiseHand[1] = raise1;
         raiseHand[2] = raise2;
 
-        pop0.scale(140, 140);
-        pop1.scale(140, 140);
-        pop2.scale(140, 140);
+        pop0.scale(220, 220);
+        pop1.scale(220, 220);
+        pop2.scale(220, 220);
         popAnim[0] = pop0;
         popAnim[1] = pop1;
         popAnim[2] = pop2;
 
-
         setImage(raiseHand[0]);
     }
 
-    public void act() {
-     
-        animateRaise();
-        checkHeroCollision();
-        checkDefeatBoss();  
-        //moveBoss(10);
-        shoot();
-    
+    public void act() 
+    {
+        if (state == 0) 
+        {
+            animateRaise();
+            checkHeroCollision();
+            updatePhaseAndShoot();
+            moveBoss(5);
+        } else if (state == 1) 
+        {
+            animatePop();
+        }
     }
 
-    public void animateRaise() {
+    public void animateRaise() 
+    {
         animationCounter++;
-        if (animationCounter % (animationDelay * 3) == 0) {
-            frameIndex = 0;} 
-        else if (animationCounter % animationDelay == 0) {
+        if (animationCounter % (animationDelay * 3) == 0)
+        {
+            frameIndex = 0;
+            setImage(raiseHand[frameIndex]);
+        } else if (animationCounter % animationDelay == 0) 
+        {
             frameIndex = (frameIndex + 1) % 3;
             setImage(raiseHand[frameIndex]);
         }
     }
 
-    public void pushHero(){
-        Hero hero = getWorld().getObjects(Hero.class).get(0);
-        hero.setLocation(hero.getX() - 50, hero.getY() - 50);
-    
-    }
-    
-    public void checkHeroCollision() {
+    public void checkHeroCollision() 
+    {
         Hero hero = (Hero)getOneIntersectingObject(Hero.class);
-        if (hero != null) {
+        if (hero != null) 
+        {
             int heroBottom = hero.getY() + hero.getImage().getHeight() / 2;
             int bossTop = getY() - getImage().getHeight() / 2;
-            if (heroBottom < bossTop + 10) {
-                getHurtBoss();
-                pushHero();
+            int currentPhase = timerRef.getPhase();
+
+            if (currentPhase == 4 && heroBottom < bossTop + 10) 
+            {
+                state = 1;
+                animationCounter = 0;
                 frameIndex = 0;
-            } 
-            else {
-                // Герой сбоку/снизу — проигрыш
-                getWorld().addObject(new ResultImage("lose.png"), getWorld().getWidth()/2, getWorld().getHeight()/2);
-                Greenfoot.delay(100); 
+            } else 
+            {
+                getWorld().addObject(new ResultImage("lose.png"), getWorld().getWidth() / 2, getWorld().getHeight() / 2);
+                Greenfoot.delay(100);
                 restartWithCamera();
             }
         }
     }
 
-    
-    public void animatePop() {
-        if (animationCounter % animationDelay == 0 && frameIndex < 3) {
+    public void animatePop() 
+    {
+        animationCounter++;
+        if (frameIndex < popAnim.length && animationCounter >= animationDelay) 
+            {
             setImage(popAnim[frameIndex]);
             frameIndex++;
-        }
-        animationCounter++;
-        if (frameIndex >= 3) {
+            animationCounter = 0; 
+            }
+
+        if (frameIndex >= popAnim.length) 
+            {
             getWorld().addObject(new ResultImage("win.png"), getWorld().getWidth() / 2, getWorld().getHeight() / 2);
-            Greenfoot.delay(130); 
-            Greenfoot.setWorld(new Menu()); 
+            Greenfoot.delay(130);
+            Greenfoot.setWorld(new Menu());
         }
-        
     }
-    
-    private void restartWithCamera() {
+
+
+    private void restartWithCamera() 
+    {
         GameWorld newWorld = new GameWorld();
         Hero newHero = newWorld.getHero();
         Camera camera = new Camera(newWorld, newHero);
         Greenfoot.setWorld(camera);
     }
-    
-    
-    private void walk(int offset){
-        
+
+    private void walk(int offset) 
+    {
         int currentX = getX();
         int currentY = getY();
         int direction = random.nextInt(4);
-        switch(direction){
+        switch (direction) 
+        {
             case 0:
-                if (currentX + offset < getWorld().getWidth() - getImage().getWidth()/2){
-                    setLocation(getX() + offset, getY());
+                if (currentX + offset < getWorld().getWidth() - getImage().getWidth() / 2) 
+                {
+                    setLocation(currentX + offset, currentY);
                 }
                 break;
             case 1:
-                 if (currentX - offset > getImage().getWidth()/2){
-                    setLocation(getX() - offset, getY());
+                if (currentX - offset > getImage().getWidth() / 2) 
+                {
+                    setLocation(currentX - offset, currentY);
                 }
                 break;
             case 2:
-                if (currentY - offset > getImage().getHeight()/2){
-                    setLocation(getX(), getY() - offset);
+                if (currentY - offset > getImage().getHeight() / 2) 
+                {
+                    setLocation(currentX, currentY - offset);
                 }
                 break;
             case 3:
-                 if (currentY + offset < getWorld().getHeight() -getImage().getHeight()/2){
-                    setLocation(getX(), getY() + offset);
+                if (currentY + offset < getWorld().getHeight() - getImage().getHeight() / 2) 
+                {
+                    setLocation(currentX, currentY + offset);
                 }
                 break;
         }
     }
-    
-    private void moveBoss(int offset){
+
+    private void moveBoss(int offset) 
+    {
         DelayMove--;
-        if (DelayMove == 0){
+        if (DelayMove <= 0) 
+        {
             walk(offset);
             DelayMove = 20;
         }
-    
     }
-    
 
-    private void checkDefeatBoss(){
-        if (this.BossHealth == 0){
-            animatePop();
-            Greenfoot.stop();
-        }
-    }
-    
-    private void getHurtBoss(){
-        this.BossHealth -= 1;
-    }
-    
-    public void shoot() 
+    private void updatePhaseAndShoot() 
     {
+        int currentPhase = timerRef.getPhase();
+
+        if (currentPhase >= 4) return; 
+        
         shotTimer--;
         if (shotTimer <= 0) 
         {
-
             int[] bulletHeights = {290, 170};
-            int selectedIndex = Greenfoot.getRandomNumber(2);
-            int selectedY = bulletHeights[selectedIndex];
-
-            int angleToShoot = 180; 
-
+            int selectedY = bulletHeights[Greenfoot.getRandomNumber(2)];
+            int angleToShoot = 180;
             int spacing = 80;
 
-            for (int i = -1; i <= 1; i++) 
+            if (currentPhase == 1) 
             {
-            int offsetX = i * spacing;
-            BosBullet bullet = new BosBullet(angleToShoot);
-            getWorld().addObject(bullet, getX() + offsetX, selectedY);
+                getWorld().addObject(new BosBullet(angleToShoot), getX(), selectedY);
+            } else if (currentPhase == 2) 
+            {
+                getWorld().addObject(new BosBullet(angleToShoot), getX() - spacing / 2, selectedY);
+                getWorld().addObject(new BosBullet(angleToShoot), getX() + spacing / 2, selectedY);
+            } else if (currentPhase == 3) 
+            {
+                for (int i = -1; i <= 1; i++) 
+                {
+                    int offsetX = i * spacing;
+                    getWorld().addObject(new BosBullet(angleToShoot), getX() + offsetX, selectedY);
+                }
             }
-
             shotTimer = shootDelay;
         }
     }
 }
-
