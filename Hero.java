@@ -21,15 +21,14 @@ public class Hero extends Actor {
     private int groundLevel = 310;
 
     // Конструктор по умолчанию (оставляем для других миров)
-    public Hero(boolean flag) {
-        this.FinalLoca = flag;
+    public Hero() {
         setupImages();
     }
 
     // Конструктор с указанием уровня земли
-    public Hero(boolean flag, int groundLevel) {
-        this(flag);
+    public Hero(int groundLevel) {
         this.groundLevel = groundLevel;
+        setupImages();
     }
 
     private void setupImages() {
@@ -75,20 +74,12 @@ public class Hero extends Actor {
         else {
             HereWeGo = 1;
         }
-
-        if (FinalLoca) {
-            if (Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up")) {
-                setLocation(getX(), getY() - speedH);
-            }
-            else if ((Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("down")) && getY() < getWorld().getHeight() - getImage().getHeight() / 2) {
-                setLocation(getX(), getY() + speedH);
-            }
-        }
-        else {
-            if (Greenfoot.isKeyDown("space") && check()) {
+        
+        if (Greenfoot.isKeyDown("space") && check()) {
                 speedV = Jump;
+                Greenfoot.playSound("jumpSound.wav");
             } 
-        }
+        
     }
 
     public void animate() {
@@ -166,6 +157,7 @@ public class Hero extends Actor {
     
     public void checkPortal() {
         if (isTouching(Portal.class)) {
+            getWorld().stopped();
             Greenfoot.setWorld(new FinalDisplay());
         }
     }

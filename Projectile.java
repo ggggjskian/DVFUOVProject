@@ -16,6 +16,7 @@ public class Projectile extends Actor {
     public void act() {
         setLocation(getX(), getY() + speed);
         if (isTouching(Hero.class)) {
+            Greenfoot.playSound("hit.wav");
             restartWithCamera(); 
         } 
         else if (getY() > getWorld().getHeight() - getImage().getHeight()) {

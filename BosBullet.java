@@ -35,6 +35,7 @@ public class BosBullet extends Actor
         if (isTouching(Hero.class)) 
         {
             World world = getWorld();
+            
             if (world != null) 
             {
                 ResultImage loseImage = new ResultImage("lose.png");
@@ -45,8 +46,8 @@ public class BosBullet extends Actor
         }
     }
 
-    private void restartWithCamera() 
-    {
+    private void restartWithCamera() {
+        getWorld().stopped();
         GameWorld newWorld = new GameWorld();
         Hero newHero = newWorld.getHero();
         Camera camera = new Camera(newWorld, newHero);

@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Hero
-comment1.params=flag
-comment1.target=Hero(boolean)
+comment1.params=
+comment1.target=Hero()
 comment10.params=
 comment10.target=void\ checkLandUnderLeft()
 comment11.params=
@@ -10,8 +10,8 @@ comment12.params=
 comment12.target=void\ fall()
 comment13.params=
 comment13.target=void\ checkPortal()
-comment2.params=flag\ groundLevel
-comment2.target=Hero(boolean,\ int)
+comment2.params=groundLevel
+comment2.target=Hero(int)
 comment3.params=
 comment3.target=void\ setupImages()
 comment4.params=
