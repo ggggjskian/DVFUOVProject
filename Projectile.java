@@ -25,7 +25,9 @@ public class Projectile extends Actor {
     }
 
     private void restartWithCamera() {
-        GameWorld newWorld = new GameWorld();
+
+        getWorld().stopped();
+GameWorld newWorld = new GameWorld();
         Hero newHero = newWorld.getHero();
         Camera camera = new Camera(newWorld, newHero);
         Greenfoot.setWorld(camera);
