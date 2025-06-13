@@ -4,4 +4,6 @@ comment1.params=
 comment1.target=MyWorld()
 comment2.params=width\ height\ cellSize
 comment2.target=MyWorld(int,\ int,\ int)
-numComments=3
+comment3.params=
+comment3.target=void\ stopped()
+numComments=4

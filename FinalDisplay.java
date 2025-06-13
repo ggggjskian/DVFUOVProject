@@ -4,7 +4,8 @@ public class FinalDisplay extends MyWorld {
     
     int deleteImagetime = 180;
     GreenfootImage PhoneImage;
-    private GreenfootSound backgroundMusic;
+    int textX;
+    int textY;
     public FinalDisplay() {
         PhoneImage = new GreenfootImage("finalLoc.png");
         PhoneImage.scale(getWidth(), getHeight());
@@ -15,6 +16,8 @@ public class FinalDisplay extends MyWorld {
         
         
         addObject(new Platform(), 240, 240);
+        textX = 240;
+        textY = 22;
         showText("По окончанию таймера нужно прыгать на босса", 240, 22);
         TimerDisplay timer = new TimerDisplay(20);
         addObject(timer, 560, 20);
@@ -31,14 +34,9 @@ public class FinalDisplay extends MyWorld {
     public void deletetTimer(){
         deleteImagetime--;
         if (deleteImagetime <= 0){
-            showText(" ", 240, 22);
+            showText(" ", textX, textY);
         }
     
     }
-    
-    public void stopped() {
-        backgroundMusic.stop(); 
-    }
-    
-  
+     
 }

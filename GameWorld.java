@@ -5,18 +5,13 @@ public class GameWorld extends MyWorld {
     private Hero hero;
     private int projectileTimer = 0;
     private int spawnInterval = 70;
-    private GreenfootSound backgroundMusic;
+    
     public GameWorld() {
         super(600, 3600, 1);
         PhoneImage = new GreenfootImage("allGamev2.png");
         setBackground(PhoneImage);
-        
         hero = new Hero(3510); 
         addObject(hero, getWidth() / 2 , 3510);
-        backgroundMusic = new GreenfootSound("mainLocaMusic.wav");
-        if (!backgroundMusic.isPlaying()) {
-            backgroundMusic.playLoop();
-        }
         generatePlatforms();
         generatePlatforms();
         Portal portal = new Portal();
@@ -75,7 +70,5 @@ public class GameWorld extends MyWorld {
         return hero;
     }
     
-    public void stopped() {
-        backgroundMusic.stop(); 
-    }
+    
 }

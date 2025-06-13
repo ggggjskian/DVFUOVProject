@@ -2,8 +2,7 @@ import greenfoot.*;
 
 public class BackButton extends Button
 {
-    public BackButton()
-    {
+    public BackButton() {
         super(40, 35, "Back.png"); 
     }
 
@@ -12,8 +11,8 @@ public class BackButton extends Button
         execute(this::goBackToMenu);
     }
 
-    public void goBackToMenu()
-    {
+    public void goBackToMenu() {
+        getWorld().stopped();
         Greenfoot.setWorld(new Menu());
     }
 }

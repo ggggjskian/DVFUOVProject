@@ -5,7 +5,7 @@ public class Camera extends World {
     private double s;
     private World w;
     private Actor[] h;
-
+    public GreenfootSound backgroundMusic;
 
     public Camera(World world, Actor host) {
         super(600, 400, world.getCellSize(), false);
@@ -16,7 +16,10 @@ public class Camera extends World {
         h = new Actor[1];
         h[0] = host;
         s = 1;
-
+        
+        backgroundMusic = new GreenfootSound("mainLocaMusic.wav");
+        backgroundMusic.playLoop();
+        
         setGhosts();
         setBackground();
         addObject(new BackButton(), 17, 15);
@@ -77,5 +80,11 @@ public class Camera extends World {
         public Ghost(GreenfootImage i){
             setImage(i);
         }
+    }
+    
+    public void stopped() {
+        if (backgroundMusic != null) {
+            backgroundMusic.stop();
+        } 
     }
 }

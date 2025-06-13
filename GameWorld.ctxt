@@ -10,6 +10,4 @@ comment4.params=
 comment4.target=void\ generatePlatforms()
 comment5.params=
 comment5.target=Hero\ getHero()
-comment6.params=
-comment6.target=void\ stopped()
-numComments=7
+numComments=6
