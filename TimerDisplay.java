@@ -1,38 +1,32 @@
 import greenfoot.*;
 
-public class TimerDisplay extends Actor 
-{
+public class TimerDisplay extends Actor {
     private int timeLeft;
     private int tickCounter = 0;
     private GreenfootImage image;
     private int phaseCount = 1;
     private int maxPhases = 4; 
 
-    public TimerDisplay(int seconds) 
-    {
+    public TimerDisplay(int seconds) {
         timeLeft = seconds;
         updateImage();
     }
 
-    public void act() 
-    {
-        if (phaseCount >= maxPhases) 
-        {
-            if (getWorld() != null) 
-            {
+    public void act() {
+        
+        if (phaseCount >= maxPhases) {
+            if (getWorld() != null) {
                 getWorld().removeObject(this);
             }
             return;
         }
 
         tickCounter++;
-        if (tickCounter >= 60) 
-        {
+        if (tickCounter >= 60) {
             tickCounter = 0;
             timeLeft--;
 
-            if (timeLeft < 0) 
-            {
+            if (timeLeft < 0) {
                 timeLeft = 20;  
                 phaseCount++;  
             }
@@ -40,8 +34,7 @@ public class TimerDisplay extends Actor
         }
     }
 
-    private void updateImage() 
-    {
+    private void updateImage() {
         image = new GreenfootImage(150, 30);
         image.setColor(new Color(0, 0, 0, 0));
         image.fill();
@@ -52,15 +45,12 @@ public class TimerDisplay extends Actor
         setImage(image);
     }
 
-    public int getTimeLeft() 
-    {
+    public int getTimeLeft() {
         return timeLeft;
     }
 
-    public int getPhase() 
-    {
-        if (phaseCount >= maxPhases) 
-        {
+    public int getPhase() {
+        if (phaseCount >= maxPhases) {
             return maxPhases;
         }
         return phaseCount;

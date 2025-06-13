@@ -62,6 +62,12 @@ public class Camera extends World {
         }
         w.act();
     }
+    
+    public void stopped() {
+        if (backgroundMusic != null) {
+            backgroundMusic.stop();
+        } 
+    }
 
     private class Ghost extends Actor {
 
@@ -82,9 +88,4 @@ public class Camera extends World {
         }
     }
     
-    public void stopped() {
-        if (backgroundMusic != null) {
-            backgroundMusic.stop();
-        } 
-    }
 }

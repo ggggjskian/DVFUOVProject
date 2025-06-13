@@ -21,8 +21,7 @@ public class GameWorld extends MyWorld {
 
     public void act() {
         projectileTimer++;
-        if (projectileTimer >= spawnInterval) 
-        {
+        if (projectileTimer >= spawnInterval) {
             spawnProjectile();
             projectileTimer = 0;
         }

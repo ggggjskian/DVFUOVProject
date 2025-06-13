@@ -28,8 +28,7 @@ public class Boss extends Actor
 
     TimerDisplay timerRef;
 
-    public Boss(TimerDisplay timer) 
-    {
+    public Boss(TimerDisplay timer) {
         this.timerRef = timer;
 
         raise0.scale(190, 190);
@@ -49,50 +48,40 @@ public class Boss extends Actor
         setImage(raiseHand[0]);
     }
 
-    public void act() 
-    {
-        if (state == 0) 
-        {
+    public void act()  {
+        if (state == 0) {
             animateRaise();
             checkHeroCollision();
             updatePhaseAndShoot();
             moveBoss(5);
-        } else if (state == 1) 
-        {
+        } else if (state == 1) {
             animatePop();
         }
     }
 
-    public void animateRaise() 
-    {
+    public void animateRaise() {
         animationCounter++;
-        if (animationCounter % (animationDelay * 3) == 0)
-        {
+        if (animationCounter % (animationDelay * 3) == 0) {
             frameIndex = 0;
             setImage(raiseHand[frameIndex]);
-        } else if (animationCounter % animationDelay == 0) 
-        {
+        } else if (animationCounter % animationDelay == 0) {
             frameIndex = (frameIndex + 1) % 3;
             setImage(raiseHand[frameIndex]);
         }
     }
 
-    public void checkHeroCollision() 
-    {
+    public void checkHeroCollision() {
         Hero hero = (Hero)getOneIntersectingObject(Hero.class);
-        if (hero != null) 
-        {
+        if (hero != null) {
             int heroBottom = hero.getY() + hero.getImage().getHeight() / 2;
             int bossTop = getY() - getImage().getHeight() / 2;
             int currentPhase = timerRef.getPhase();
 
-            if (currentPhase == 4 && heroBottom < bossTop + 10) 
-            {
+            if (currentPhase == 4 && heroBottom < bossTop + 10) {
                 state = 1;
                 animationCounter = 0;
-                frameIndex = 0;
-            } else 
-            {
+                frameIndex = 0;} 
+            else {
                 getWorld().addObject(new ResultImage("lose.png"), getWorld().getWidth() / 2, getWorld().getHeight() / 2);
                 Greenfoot.delay(100);
                 restartWithCamera();
@@ -100,18 +89,15 @@ public class Boss extends Actor
         }
     }
 
-    public void animatePop() 
-    {
+    public void animatePop() {
         animationCounter++;
-        if (frameIndex < popAnim.length && animationCounter >= animationDelay) 
-            {
+        if (frameIndex < popAnim.length && animationCounter >= animationDelay) {
             setImage(popAnim[frameIndex]);
             frameIndex++;
             animationCounter = 0; 
-            }
+        }
 
-        if (frameIndex >= popAnim.length) 
-            {
+        if (frameIndex >= popAnim.length) {
             getWorld().addObject(new ResultImage("win.png"), getWorld().getWidth() / 2, getWorld().getHeight() / 2);
             Greenfoot.delay(130);
             Greenfoot.setWorld(new Menu());
@@ -119,83 +105,68 @@ public class Boss extends Actor
     }
 
 
-    private void restartWithCamera() 
-    {
+    private void restartWithCamera() {
         GameWorld newWorld = new GameWorld();
         Hero newHero = newWorld.getHero();
         Camera camera = new Camera(newWorld, newHero);
         Greenfoot.setWorld(camera);
     }
 
-    private void walk(int offset) 
-    {
+    private void walk(int offset) {
         int currentX = getX();
         int currentY = getY();
         int direction = random.nextInt(4);
-        switch (direction) 
-        {
+        switch (direction) {
             case 0:
-                if (currentX + offset < getWorld().getWidth() - getImage().getWidth() / 2) 
-                {
+                if (currentX + offset < getWorld().getWidth() - getImage().getWidth() / 2) {
                     setLocation(currentX + offset, currentY);
                 }
                 break;
             case 1:
-                if (currentX - offset > getImage().getWidth() / 2) 
-                {
+                if (currentX - offset > getImage().getWidth() / 2) {
                     setLocation(currentX - offset, currentY);
                 }
                 break;
             case 2:
-                if (currentY - offset > getImage().getHeight() / 2) 
-                {
+                if (currentY - offset > getImage().getHeight() / 2) {
                     setLocation(currentX, currentY - offset);
                 }
                 break;
             case 3:
-                if (currentY + offset < getWorld().getHeight() - getImage().getHeight() / 2) 
-                {
+                if (currentY + offset < getWorld().getHeight() - getImage().getHeight() / 2) {
                     setLocation(currentX, currentY + offset);
                 }
                 break;
         }
     }
 
-    private void moveBoss(int offset) 
-    {
+    private void moveBoss(int offset) {
         DelayMove--;
-        if (DelayMove <= 0) 
-        {
+        if (DelayMove <= 0) {
             walk(offset);
             DelayMove = 20;
         }
     }
 
-    private void updatePhaseAndShoot() 
-    {
+    private void updatePhaseAndShoot() {
         int currentPhase = timerRef.getPhase();
 
         if (currentPhase >= 4) return; 
         
         shotTimer--;
-        if (shotTimer <= 0) 
-        {
+        if (shotTimer <= 0) {
             int[] bulletHeights = {290, 170};
             int selectedY = bulletHeights[Greenfoot.getRandomNumber(2)];
             int angleToShoot = 180;
             int spacing = 80;
 
-            if (currentPhase == 1) 
-            {
+            if (currentPhase == 1) {
                 getWorld().addObject(new BosBullet(angleToShoot), getX(), selectedY);
-            } else if (currentPhase == 2) 
-            {
+            } else if (currentPhase == 2) {
                 getWorld().addObject(new BosBullet(angleToShoot), getX() - spacing / 2, selectedY);
                 getWorld().addObject(new BosBullet(angleToShoot), getX() + spacing / 2, selectedY);
-            } else if (currentPhase == 3) 
-            {
-                for (int i = -1; i <= 1; i++) 
-                {
+            } else if (currentPhase == 3) {
+                for (int i = -1; i <= 1; i++) {
                     int offsetX = i * spacing;
                     getWorld().addObject(new BosBullet(angleToShoot), getX() + offsetX, selectedY);
                 }

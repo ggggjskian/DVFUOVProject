@@ -87,10 +87,10 @@ public class Hero extends Actor {
         int frame = (animationCounter / animationDelay) % 3;
 
         if (HereWeGo == 2) { 
-            setImage(walkRight[frame]);
-        } else if (HereWeGo == 0) { 
-            setImage(walkLeft[frame]);
-        } else {
+            setImage(walkRight[frame]);} 
+        else if (HereWeGo == 0) { 
+            setImage(walkLeft[frame]);} 
+        else {
             if (facingRight)
                 setImage(StaticHero);
             else

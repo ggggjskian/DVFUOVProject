@@ -6,8 +6,7 @@ public class BackButton extends Button
         super(40, 35, "Back.png"); 
     }
 
-    public void act()
-    {
+    public void act() {
         execute(this::goBackToMenu);
     }
 
